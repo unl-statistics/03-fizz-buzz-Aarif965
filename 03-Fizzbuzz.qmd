@@ -630,10 +630,10 @@ except ValueError:
 See more examples of this in the [Input Validation](https://srvanderplas.github.io/stat-computing-r-python/part-gen-prog/05-functions.html#input-validation) section of the textbook.
 
 ```{r function-error-fizzbuzz-r}
-xx <- sample(1:100, 10) # get a random xx
+##xx <- sample(1:100, 10) # get a random xx
 yy <- rep(NA, 10)
 
-xx <- "Cow"
+xx <- c("apple", "banana", "cherry", "date", "elderberry")
 
 fizzbuzz <- function(x) {
   # Your code goes here
@@ -665,30 +665,37 @@ res
 ```{python function-error-fizzbuzz-py}
 import pandas as pd
 from random import choices
-xx = np.array(choices(range(100), k = 10)) + 1
+##xx = np.array(choices(range(100), k = 10)) + 1
+
+xx = np.array(['apple', 'banana', 'cherry', 'date', 'elderberry'])
 
 def fizzbuzz(x):
   y = [np.nan]*len(x) # this just defines something to return
   # Your code goes here
+  try:
+    for i in range(len(x)):
+      if x[i]%3 == 0 and x[i]%5 != 0:
+        y[i]="Fizz"
+      elif x[i]%3 != 0 and x[i]%5 == 0:
+        y[i]="Buzz"
+      elif x[i]%3 == 0 and x[i]%5 == 0:
+        y[i]="FizzBuzz"
+      else:
+        y[i]=x[i]
+        
+  except TypeError:
+    print("Error: The input array must be numric")
+    return
   
-  for i in range(len(x)):
-    if x[i]%3 == 0 and x[i]%5 != 0:
-      y[i]="Fizz"
-    elif x[i]%3 != 0 and x[i]%5 == 0:
-      y[i]="Buzz"
-    elif x[i]%3 == 0 and x[i]%5 == 0:
-      y[i]="FizzBuzz"
-    else:
-      y[i]=x[i]
   return y
 
 yy = fizzbuzz(x = xx)
 
 # Printing the results in a data frame
-res = pd.DataFrame({"x": xx, "result": yy})
-res
-  
 
+if yy is not None:
+  res = pd.DataFrame({"x": xx, "result": yy})
+  res
 
 ```
 >>>>>>> 426598c6e8e934afde6477b6da607d51a32c6895
