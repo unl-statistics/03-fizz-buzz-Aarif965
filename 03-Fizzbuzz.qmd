@@ -696,6 +696,6 @@ yy = fizzbuzz(x = xx)
 if yy is not None:
   res = pd.DataFrame({"x": xx, "result": yy})
   res
-
+ 
 ```
 >>>>>>> 426598c6e8e934afde6477b6da607d51a32c6895
